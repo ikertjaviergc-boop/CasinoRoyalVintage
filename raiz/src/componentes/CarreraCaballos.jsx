@@ -30,7 +30,6 @@ const CarreraCaballos = ({ saldo, setSaldo }) => {
             setEnCarrera(false);
             setGanador(alguienGano);
             
-            // Usamos un pequeño delay idéntico al de la ruleta para que la interfaz se actualice completamente antes del alert
             setTimeout(() => {
               evaluarResultado(alguienGano);
             }, 100);
@@ -59,14 +58,12 @@ const CarreraCaballos = ({ saldo, setSaldo }) => {
     setEnCarrera(true);
   };
 
-  // Corrección aquí: Ahora recibe el objeto completo del caballo que cruzó la meta
   const evaluarResultado = (caballoGanador) => {
     if (caballoGanador.id === caballoSeleccionado) {
       const premio = montoApuesta * 3;
       setSaldo(prev => prev + premio);
       alert(`🎉 ¡Excelente elección! Tu caballo ganó. Recibes $${premio} fichas.`);
     } else {
-      // Si perdiste, ahora te revela de forma explícita el nombre del corcel victorioso
       alert(`❌ Suerte para la próxima carrera. El ganador fue "${caballoGanador.nombre}". Tu caballo quedó rezagado.`);
     }
   };
@@ -100,14 +97,21 @@ const CarreraCaballos = ({ saldo, setSaldo }) => {
             </select>
           </div>
 
-          <div>
+          {/* CONTENEDOR ACTUALIZADO CON EL BOTÓN MAX */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <label style={{ marginRight: '0.5rem', fontWeight: 'bold', color: '#ffd700' }}>Apuesta ($):</label>
             <input 
               type="number" 
               value={montoApuesta} 
               onChange={(e) => setMontoApuesta(Math.max(1, Number(e.target.value)))} 
-              style={{ width: '80px', padding: '0.4rem', backgroundColor: '#111', color: '#fff', border: '1px solid #ffd700' }}
+              style={{ width: '80px', padding: '0.4rem', backgroundColor: '#111', color: '#fff', border: '1px solid #ffd700', textAlign: 'center', fontWeight: 'bold' }}
             />
+            <button 
+              onClick={() => setMontoApuesta(saldo)}
+              style={{ padding: '0.4rem 0.7rem', backgroundColor: '#d4af37', color: '#000', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px', fontSize: '0.85rem' }}
+            >
+              MAX
+            </button>
           </div>
 
           <button onClick={iniciarCarrera} style={{ padding: '0.6rem 1.5rem', backgroundColor: '#ffd700', color: '#000', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '3px' }}>
