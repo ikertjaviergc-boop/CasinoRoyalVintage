@@ -45,12 +45,10 @@ const Ruleta = ({ saldo, setSaldo }) => {
       const resultadoNum = Math.floor(Math.random() * 37);
       const resultadoColor = resultadoNum === 0 ? 'verde' : numerosRojos.includes(resultadoNum) ? 'rojo' : 'negro';
       
-      // PASO 1: Frenamos la animación y pintamos de inmediato el resultado real en la interfaz
       setGirando(false);
       setNumeroGanador(resultadoNum);
       setColorGanador(resultadoColor);
 
-      // PASO 2: Le damos un respiro de 100ms para asegurar que el DOM dibuje el número definitivo antes del alert
       setTimeout(() => {
         evaluarPremio(resultadoNum, resultadoColor);
       }, 100);
@@ -176,13 +174,20 @@ const Ruleta = ({ saldo, setSaldo }) => {
             )}
           </div>
 
-          <div>
-            <label style={{ color: '#ffd700', marginRight: '0.5rem', fontWeight: 'bold' }}>Fichas ($):</label>
+          {/* SECCIÓN ACTUALIZADA CON EL BOTÓN MAX */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <label style={{ color: '#ffd700', fontWeight: 'bold' }}>Fichas ($):</label>
             <input 
               type="number" value={montoApuesta} 
               onChange={(e) => setMontoApuesta(Math.max(1, Number(e.target.value)))}
-              style={{ width: '80px', padding: '0.4rem', backgroundColor: '#111', color: '#fff', border: '1px solid #ffd700' }}
+              style={{ width: '80px', padding: '0.4rem', backgroundColor: '#111', color: '#fff', border: '1px solid #ffd700', textAlign: 'center', fontWeight: 'bold' }}
             />
+            <button 
+              onClick={() => setMontoApuesta(saldo)}
+              style={{ padding: '0.4rem 0.7rem', backgroundColor: '#d4af37', color: '#000', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px', fontSize: '0.85rem' }}
+            >
+              MAX
+            </button>
           </div>
 
           <button onClick={lanzarRuleta} style={{ padding: '0.6rem 1.5rem', backgroundColor: '#ffd700', color: '#000', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '3px', textTransform: 'uppercase' }}>
