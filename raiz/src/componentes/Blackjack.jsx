@@ -218,32 +218,39 @@ const Blackjack = ({ saldo, setSaldo }) => {
       </div>
 
       {/* PANEL DE CONTROL / ACCIONES */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
         {!enJuego && !turnoCrupier ? (
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.8rem', borderRadius: '4px' }}>
-            <div>
-              <label style={{ color: '#ffd700', marginRight: '0.5rem', fontWeight: 'bold' }}>Apuesta:</label>
-              <input 
+            <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.8rem', borderRadius: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <label style={{ color: '#ffd700', fontWeight: 'bold' }}>Apuesta:</label>
+                <input 
                 type="number" value={montoApuesta}
                 onChange={(e) => setMontoApuesta(Math.max(1, Number(e.target.value)))}
                 style={{ width: '80px', padding: '0.4rem', backgroundColor: '#000', color: '#fff', border: '1px solid #ffd700', borderRadius: '4px', textAlign: 'center' }}
-              />
+                />
+                {/* BOTÓN MAX */}
+                <button 
+                onClick={() => setMontoApuesta(saldo)}
+                style={{ padding: '0.4rem 0.7rem', backgroundColor: '#27ae60', color: '#fff', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px', fontSize: '0.85rem' }}
+                >
+                MAX
+                </button>
             </div>
             <button onClick={iniciarPartida} style={{ padding: '0.6rem 1.5rem', backgroundColor: '#ffd700', color: '#000', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px', textTransform: 'uppercase' }}>
-              Repartir Cartas
+                Repartir Cartas
             </button>
-          </div>
+            </div>
         ) : (
-          <>
+            <>
             <button onClick={pedirCarta} disabled={turnoCrupier} style={{ padding: '0.7rem 1.5rem', backgroundColor: '#3498db', color: '#fff', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px' }}>
-              🃏 Pedir Carta (Hit)
+                🃏 Pedir Carta (Hit)
             </button>
             <button onClick={plantarse} disabled={turnoCrupier} style={{ padding: '0.7rem 1.5rem', backgroundColor: '#e67e22', color: '#fff', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px' }}>
-              🛑 Plantarse (Stand)
+                🛑 Plantarse (Stand)
             </button>
-          </>
+            </>
         )}
-      </div>
+        </div>
 
       {/* Letrero Informativo de Estado de la Partida */}
       {mensajeFinal && (
