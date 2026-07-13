@@ -125,53 +125,53 @@ const Tragamonedas = ({ saldo, setSaldo }) => {
         ))}
       </div>
 
-      {/* Panel de Control de Apuestas */}
       {!girando && (
-        <div style={{
-          backgroundColor: 'rgba(0,0,0,0.4)',
-          padding: '1rem',
-          borderRadius: '6px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '1.5rem',
-          border: '1px solid rgba(255,255,255,0.1)'
-        }}>
-          <div>
-            <label style={{ color: '#ffd700', fontWeight: 'bold', marginRight: '0.5rem' }}>Apuesta:</label>
-            <input 
-              type="number" 
-              value={montoApuesta} 
-              onChange={(e) => setMontoApuesta(Math.max(1, Number(e.target.value)))}
-              style={{ width: '90px', padding: '0.4rem', backgroundColor: '#000', color: '#fff', border: '1px solid #ffd700', borderRadius: '4px', textAlign: 'center', fontWeight: 'bold' }}
-            />
-          </div>
-
+      <div style={{
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        padding: '1rem',
+        borderRadius: '6px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '1rem',
+        border: '1px solid rgba(255,255,255,0.1)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <label style={{ color: '#ffd700', fontWeight: 'bold' }}>Apuesta:</label>
+          <input 
+            type="number" 
+            value={montoApuesta} 
+            onChange={(e) => setMontoApuesta(Math.max(1, Number(e.target.value)))}
+            style={{ width: '90px', padding: '0.4rem', backgroundColor: '#000', color: '#fff', border: '1px solid #ffd700', borderRadius: '4px', textAlign: 'center', fontWeight: 'bold' }}
+          />
+          {/* BOTÓN MAX */}
           <button 
-            onClick={jalarPalanca} 
-            style={{
-              padding: '0.7rem 2rem',
-              backgroundColor: '#ffd700',
-              color: '#000',
-              border: 'none',
-              fontWeight: 'bold',
-              fontSize: '1.1rem',
-              cursor: 'pointer',
-              borderRadius: '4px',
-              boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-              textTransform: 'uppercase'
-            }}
+            onClick={() => setMontoApuesta(saldo)}
+            style={{ padding: '0.4rem 0.7rem', backgroundColor: '#d4af37', color: '#000', border: 'none', fontWeight: 'bold', cursor: 'pointer', borderRadius: '4px', fontSize: '0.85rem' }}
           >
-            🕹️ Jalar Palanca
+            MAX
           </button>
         </div>
-      )}
 
-      {girando && (
-        <p style={{ color: '#ffd700', fontStyle: 'italic', margin: '1rem 0', fontSize: '1.1rem', animation: 'pulse 1s infinite' }}>
-          ✨ ¡Los rodillos están girando! ✨
-        </p>
-      )}
+        <button 
+          onClick={jalarPalanca} 
+          style={{
+            padding: '0.7rem 2rem',
+            backgroundColor: '#ffd700',
+            color: '#000',
+            border: 'none',
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            cursor: 'pointer',
+            borderRadius: '4px',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+            textTransform: 'uppercase'
+          }}
+        >
+          🕹️ Jalar Palanca
+        </button>
+      </div>
+    )}
 
       {/* Tabla de Premios Breve */}
       <div style={{ marginTop: '2rem', fontSize: '0.8rem', color: '#ddd', borderTop: '1px dashed rgba(255,255,255,0.2)', paddingTop: '1rem' }}>
